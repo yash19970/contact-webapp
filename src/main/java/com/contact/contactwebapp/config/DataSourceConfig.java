@@ -58,7 +58,7 @@ public class DataSourceConfig {
 	@Primary
 	@Bean(name = "masterDataSourcePersonal")
 	@ConfigurationProperties(prefix = "master.spring.datasource")
-	public DataSource masterDataSourceSurvey(@Qualifier("masterDataSourceProperties") DataSourceProperties dataSourceProperties) {
+	public DataSource masterDataSourceContactApp(@Qualifier("masterDataSourceProperties") DataSourceProperties dataSourceProperties) {
 		return dataSourceProperties.initializeDataSourceBuilder().build();
 	}
 
@@ -78,7 +78,7 @@ public class DataSourceConfig {
 
 	@Bean(name = "slaveDataSourcePersonal")
 	@ConfigurationProperties(prefix = "slave.spring.datasource")
-	public DataSource slaveDataSourceSurvey(@Qualifier("slaveDataSourceProperties") DataSourceProperties dataSourceProperties) {
+	public DataSource slaveDataSourceContactApp(@Qualifier("slaveDataSourceProperties") DataSourceProperties dataSourceProperties) {
 		return dataSourceProperties.initializeDataSourceBuilder().build();
 	}
 

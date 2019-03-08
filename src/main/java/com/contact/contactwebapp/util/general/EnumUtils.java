@@ -4,11 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author prashantkumar
- *
- */
 public class EnumUtils {
 
 	public static <T extends Enum<T>> void checkEnumFieldsAreUnique(final Class<T> enumType, final String fieldName) {
