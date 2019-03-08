@@ -45,7 +45,7 @@ public class ContactAppValidation {
 	}
 
 	public void authenticateApiKey(String apiKey) {
-		if (!apiKey.equals(WebAppConstants.APP_KEY)) {
+		if ((apiKey == null || apiKey.isEmpty()) || !apiKey.equals(WebAppConstants.APP_KEY)) {
 			throw new ValidationException(
 					ErrorDetailUtil.generateErrorDetail(propertiesReader.getProperty("contact.auth.failed.code"),
 							propertiesReader.getProperty("contact.auth.failed.message")));
