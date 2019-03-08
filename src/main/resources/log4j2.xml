@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn"
+	packages="org.apache.logging.log4j.core,com.getsentry.raven.log4j2"
+	monitorInterval="60">
+	<Properties>
+		<Property name="log-path">/opt/akoshalogs/contactwebapp/</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</pattern>
+			</PatternLayout>
+		</Console>
+		<!-- <RollingFile name="App-File-Appender" fileName="${log-path}/app_log.log" 
+			filePattern="${log-path}/app_log-%d{yyyy-MM-dd}.%i.log"> -->
+		<RollingFile name="App-File-Appender" fileName="${log-path}/webapp.log"
+	filePattern="${log-path}/test.log.%i">
+			<PatternLayout>
+				<pattern>%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</pattern>
+			</PatternLayout>
+
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingFile>
+		<RollingFile name="repoLayer-File-Appender" fileName="${log-path}/repoLayer_log.log"
+			filePattern="${log-path}/repoLayer_log.log.%i">
+			<PatternLayout>
+				<pattern>%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</pattern>
+			</PatternLayout>
+
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingFile>
+		<RollingFile name="serviceLayer-File-Appender" fileName="${log-path}/serviceLayer_log.log"
+			filePattern="${log-path}/serviceLayer_log.log.%i">
+			<PatternLayout>
+				<pattern>%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</pattern>
+			</PatternLayout>
+
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingFile>
+
+		<RollingFile name="builderLayer-File-Appender" fileName="${log-path}/builderLayer_log.log"
+			filePattern="${log-path}/buildLayer_log.log.%i">
+			<PatternLayout>
+				<pattern>%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%wEx</pattern>
+			</PatternLayout>
+
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingFile>
+
+
+	</Appenders>
+	<Loggers>
+		<!-- <Logger name="com.zaxxer" level="debug" additivity="true">
+    		<AppenderRef ref="Console-Appender" />
+    	</Logger> -->
+		<Logger name="org.springframework.web" level="info" additivity="false">
+			<AppenderRef ref="App-File-Appender" />
+		</Logger>
+		<Logger name="org.springframework.boot" level="info"
+			additivity="false">
+			<AppenderRef ref="App-File-Appender" />
+		</Logger>
+		<Logger name="org.springframework.boot.web.support.ErrorPageFilter"
+			level="debug" additivity="false">
+			<AppenderRef ref="App-File-Appender" />
+		</Logger>
+		<Logger name="com.onedirect" level="all" additivity="false">
+			<AppenderRef ref="App-File-Appender" />
+		</Logger>
+		<Logger name="repoLayer-File-Appender" level="all" additivity="false">
+			<AppenderRef ref="repoLayer-File-Appender" />
+		</Logger>
+		<Logger name="serviceLayer-File-Appender" level="all"
+			additivity="false">
+			<AppenderRef ref="serviceLayer-File-Appender" />
+		</Logger>
+		<Logger name="builderLayer-File-Appender" level="all"
+			additivity="false">
+			<AppenderRef ref="builderLayer-File-Appender" />
+		</Logger>
+		<Root level="ERROR">
+			<AppenderRef ref="App-File-Appender" />
+		</Root>
+	</Loggers>
+</Configuration>
