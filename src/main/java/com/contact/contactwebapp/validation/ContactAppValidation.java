@@ -5,6 +5,7 @@ package com.contact.contactwebapp.validation;
 
 import com.contact.contactwebapp.WebAppConstants;
 import com.contact.contactwebapp.common.exception.ValidationException;
+import com.contact.contactwebapp.crud.dto.ContactReqDTO;
 import com.contact.contactwebapp.crud.entity.ContactEntity;
 import com.contact.contactwebapp.util.general.ErrorDetailUtil;
 
@@ -49,6 +50,25 @@ public class ContactAppValidation {
 			throw new ValidationException(
 					ErrorDetailUtil.generateErrorDetail(propertiesReader.getProperty("contact.auth.failed.code"),
 							propertiesReader.getProperty("contact.auth.failed.message")));
+		}
+
+	}
+
+	public void validateInputData(ContactReqDTO contactReqDTO) {
+		if (contactReqDTO.getName() == null || contactReqDTO.getName().isEmpty()) {
+			throw new ValidationException(
+					ErrorDetailUtil.generateErrorDetail(propertiesReader.getProperty("contact.name.not.found.code"),
+							propertiesReader.getProperty("contact.name.not.found.message")));
+		}
+		if (contactReqDTO.getContNumber() == null || contactReqDTO.getContNumber().isEmpty()) {
+			throw new ValidationException(
+					ErrorDetailUtil.generateErrorDetail(propertiesReader.getProperty("contact.number.not.found.code"),
+							propertiesReader.getProperty("contact.number.not.found.message")));
+		}
+		if (contactReqDTO.getEmail() == null || contactReqDTO.getEmail().isEmpty()) {
+			throw new ValidationException(
+					ErrorDetailUtil.generateErrorDetail(propertiesReader.getProperty("contact.email.not.found.code"),
+							propertiesReader.getProperty("contact.email.not.found.message")));
 		}
 
 	}

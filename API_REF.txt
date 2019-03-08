@@ -1,0 +1,61 @@
+Parameter to be used in all Requests mandatory : apiKey : 03c7c0ace395d80182db07ae2c30f034
+
+CRUD Operations:
+
+1. Create
+ Curl
+
+ curl -X POST \
+  'http://localhost:23060/contactwebapp/contactwebapp/?apiKey=03c7c0ace395d80182db07ae2c30f034' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: b26004b1-669d-87b6-0b96-5bee5a555630' \
+  -d '{
+	"name" : "yash",
+	"email" : "yash@gmail.com",
+	"contNumber" : "9999999999"
+}'
+
+
+
+2. Get [ Pagination]
+ Curl
+
+curl -X GET \
+  'http://localhost:23060/contactwebapp/contactwebapp/?apiKey=03c7c0ace395d80182db07ae2c30f034' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 262ec172-636c-027d-2217-e8d9e18d68ba'
+
+
+3. Update Contact
+ Curl
+
+ curl -X PUT \
+  'http://localhost:23060/contactwebapp/contactwebapp/?apiKey=03c7c0ace395d80182db07ae2c30f034' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: c7db77fb-54ef-81c0-b3a7-acba6c453c82' \
+  -d '{
+	"id": 1,
+    "name": "yashh",
+    "email": "yash@gmail.com",
+    "contNumber": "99999999990",
+    "createdAt": 1551955190000
+}'
+
+4. Delete 
+ Curl
+
+ curl -X DELETE \
+  'http://localhost:23060/contactwebapp/contactwebapp/?apiKey=03c7c0ace395d80182db07ae2c30f034&id=1' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: cf8dc1be-44e4-d93b-0b12-0acb7a3a503b'
+
+
+
+  --- -- - - -- - -- - - - -- - - - -- - - 
+  Exceptions : 
+  1. validation Exception 
+   -> when duplicate entry is found while create
+   -> when apiKey passed in wrong or empty
+   -> when Name / Number is not present

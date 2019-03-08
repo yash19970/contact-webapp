@@ -59,6 +59,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public ContactReqDTO createContact(ContactReqDTO contactReqDTO) {
 		List<ContactEntity> existingContacts = fetchContactByEmailOrNumber(contactReqDTO);
+		validator.validateInputData(contactReqDTO);
 		validator.validateForDuplicate(existingContacts);
 		ContactEntity entity = contRepo.update(ContactBuilder.buildEntityFromDTO(contactReqDTO));
 		ContactReqDTO responseDTO = ContactBuilder.buildDTOFromEntity(entity);
@@ -75,6 +76,7 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public ContactReqDTO updateContact(ContactReqDTO contactReqDTO) {
 		List<ContactEntity> existingContacts = fetchContactByEmailOrNumber(contactReqDTO);
+		validator.validateInputData(contactReqDTO);
 		validator.validateForDuplicate(existingContacts);
 		ContactEntity entity = contRepo.update(ContactBuilder.buildEntityFromDTO(contactReqDTO));
 		ContactReqDTO responseDTO = ContactBuilder.buildDTOFromEntity(entity);
@@ -83,11 +85,7 @@ public class ContactServiceImpl implements ContactService {
 
 	@Override
 	public Boolean deleteContact(Integer id) {
-		ContactEntity prevEntity = contRepo.findOne(id, ContactEntity.class);
-		ContactReqDTO prevDTO = ContactBuilder.buildDTOFromEntity(prevEntity);
-		ContactEntity entityToUpdate = ContactBuilder.buildEntityFromDTO(prevDTO);
-		entityToUpdate.setStatus(DBStatusEnum.INACTIVE.getValue());
-		ContactEntity updateEntity = contRepo.update(entityToUpdate);
+		contRepo.deleteById(id, ContactEntity.class);
 		return Boolean.TRUE;
 	}
 
